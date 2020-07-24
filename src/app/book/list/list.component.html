@@ -1,0 +1,30 @@
+<div>
+  <a class="btn btn-info text-white link" routerLink="create">Create</a>
+</div>
+<div class="pt-3">
+  <table class="table table-hover">
+    <thead class="table-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Book</th>
+      <th scope="col">Category</th>
+      <th scope="col">Author</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let list of ListBook; index as i">
+      <td>{{i + 1}}</td>
+      <td>{{list.name}}</td>
+      <td>{{list.category}}</td>
+      <td>{{list.author}}</td>
+      <td>
+        <a class="btn btn-primary text-white mr-2" [routerLink]="['/books',list.id]">edit</a>
+        <button class="btn btn-danger text-white" (click)="deleteBook(i)">delete</button>
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
+</div>
+
