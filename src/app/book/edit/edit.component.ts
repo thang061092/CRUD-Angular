@@ -40,7 +40,10 @@ export class EditComponent implements OnInit {
       this.router.navigate(['/books']);
       console.log(res);
     });
-
-
   }
+
+  viewList() {
+    this.router.navigate(['/books']);
+  }
+
 }

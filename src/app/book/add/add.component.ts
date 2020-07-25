@@ -35,4 +35,7 @@ export class AddComponent implements OnInit {
 
   }
 
+  viewList() {
+    this.router.navigate(['/books']);
+  }
 }
