@@ -8,14 +8,23 @@
       <div class="form-group">
         <label>Book:</label>
         <input type="text" class="form-control" formControlName="name">
+        <div *ngIf="name.invalid && (name.dirty||name.touched)" class="alert alert-danger" role="alert">
+          Tên sách không được để trống!
+        </div>
       </div>
       <div class="form-group">
         <label>Category:</label>
         <input type="text" class="form-control" formControlName="category">
+        <div *ngIf="category.invalid && (category.dirty||category.touched)" class="alert alert-danger" role="alert">
+          Thể loại không được để trống!
+        </div>
       </div>
       <div class="form-group">
         <label>Author:</label>
         <input type="text" class="form-control" formControlName="author">
+        <div *ngIf="author.invalid && (author.dirty||author.touched)" class="alert alert-danger" role="alert">
+          Tác giả không được để trống!
+        </div>
       </div>
       <button type="submit" class="btn btn-info">Submit</button>
       <button (click)="viewList()" class="btn btn-secondary ml-3">Cancel</button>

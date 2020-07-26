@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {IBook} from '../../ibook';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BookService} from '../../book.service';
 
@@ -20,9 +19,9 @@ export class AddComponent implements OnInit {
 
   ngOnInit(): void {
     this.addForm = this.formBuilder.group({
-      name: [''],
-      category: [''],
-      author: ['']
+      name: ['', [Validators.required]],
+      category: ['', [Validators.required]],
+      author: ['', [Validators.required]]
     });
   }
 
@@ -37,5 +36,18 @@ export class AddComponent implements OnInit {
 
   viewList() {
     this.router.navigate(['/books']);
+  }
+
+
+  get name() {
+    return this.addForm.get('name');
+  }
+
+  get category() {
+    return this.addForm.get('category');
+  }
+
+  get author() {
+    return this.addForm.get('author');
   }
 }
