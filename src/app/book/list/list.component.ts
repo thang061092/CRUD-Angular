@@ -13,6 +13,7 @@ export class ListComponent implements OnInit {
   ListBook: IBook[] = [];
   keywordFilter = '';
   bookListSearch: IBook[];
+  message: string = '';
 
   constructor(private booksService: BookService,
               private router: Router,
@@ -20,6 +21,10 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.index();
+  }
+
+  index() {
     this.booksService.getAllBook().subscribe(data => {
       this.ListBook = data;
       this.bookListSearch = this.ListBook;
@@ -28,23 +33,23 @@ export class ListComponent implements OnInit {
 
   deleteBook(index) {
     const book = this.bookListSearch[index];
-    this.booksService.deleteBook(book.id).subscribe(data => {
-      this.bookListSearch = this.bookListSearch.filter(t => t.id !== book.id);
-      console.log(data);
-    });
+    if (confirm('You are sure')) {
+      this.booksService.deleteBook(book.id).subscribe(data => {
+        alert(this.message = 'Delete success!');
+        this.index();
+      });
+    }
   }
 
-  search(event: string) {
-    this.keywordFilter = event;
-    this.bookListSearch = this.keywordFilter ? this.bookfilter(this.keywordFilter) : this.ListBook;
+  search(event: any) {
+    this.keywordFilter = event.target.value.toLowerCase();
+    this.bookListSearch = this.keywordFilter ? this.bookFilter(this.keywordFilter) : this.ListBook;
   }
 
-  bookfilter(keyword: string): IBook[] {
+  bookFilter(keyword: string): IBook[] {
     return this.ListBook.filter((book: IBook) =>
       book.name.toLowerCase().indexOf(keyword) !== -1
     );
-    // return this.ListBook.filter(function(book: IBook) {
-    //   return book.name.toLowerCase().indexOf(keyword) !== -1;
-    // });
   }
+
 }
